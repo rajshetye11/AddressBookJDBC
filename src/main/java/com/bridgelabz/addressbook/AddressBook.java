@@ -1,12 +1,14 @@
 package com.bridgelabz.addressbook;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class AddressBook {
 	Connection con;
+	
 	public void getDatafromDatabase() throws SQLException{		
 		try {
 			JDBCConn connection = new JDBCConn();
@@ -30,4 +32,22 @@ public class AddressBook {
 		}
 		
 	}
+	
+	public void updateData(String firstname, int person_id) throws SQLException {
+		try{
+			JDBCConn connection = new JDBCConn();
+			con = connection.establishDbConection();
+			
+			String query = "update person set firstname=? where person_id=?";
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, firstname);
+			ps.setInt(2, person_id);
+			ps.executeUpdate();
+			System.out.println("Updated");			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}		
+	}
+	
 }
