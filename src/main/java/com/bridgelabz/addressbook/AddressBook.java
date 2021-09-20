@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 public class AddressBook {
 	Connection con;
 	
@@ -23,7 +24,8 @@ public class AddressBook {
 		                            rs.getString(2)+ " "+
 		                            rs.getString(3)+" "+
 		                            rs.getString(4)+" "+
-		                            rs.getString(5)
+		                            rs.getString(5)+" "+
+		                            rs.getString(6)
 		            );
 		        }
 		}
@@ -50,4 +52,24 @@ public class AddressBook {
 		}		
 	}
 	
+	public void getDatabyDate() throws SQLException {
+		try {
+			JDBCConn jdbccon = new JDBCConn();
+			con = jdbccon.establishDbConection();
+			
+			String query = "SELECT * FROM person WHERE dateofperson BETWEEN CAST('2017-01-01' AS DATE) AND DATE(NOW())";
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while(rs.next()) {			
+				System.out.println(
+						rs.getString(1)+" "+
+						rs.getString(2)+" "+
+						rs.getString(6));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}	
+		
+	}
 }

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+
 public class AddressBookTest {
 	
 	public AddressBook addbook = new AddressBook();
@@ -22,4 +23,11 @@ public class AddressBookTest {
 		addbook.updateData("Mahi", 3);
 		jdbccon.close();
 	}
+	
+	@Test
+	public void retriveDataFromDate() throws SQLException {
+    	Connection dbConnection= new JDBCConn().establishDbConection();
+    	addbook.getDatabyDate();
+    	dbConnection.close();
+    }
 }
