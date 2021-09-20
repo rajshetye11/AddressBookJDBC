@@ -30,4 +30,11 @@ public class AddressBookTest {
     	addbook.getDatabyDate();
     	dbConnection.close();
     }
+	
+	@Test
+	public void retriveCountFromDatabase() throws SQLException {
+		Connection dbConnection = new JDBCConn().establishDbConection();
+		addbook.getCountofPersonsByCity();
+		dbConnection.close();
+	}
 }

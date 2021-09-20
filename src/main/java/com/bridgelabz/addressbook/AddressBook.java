@@ -72,4 +72,22 @@ public class AddressBook {
 		}	
 		
 	}
+	
+	public void getCountofPersonsByCity() throws SQLException {
+		JDBCConn connection = new JDBCConn();
+		con = connection.establishDbConection();
+		try {
+			String query = String.format("select address.city ,count(address.city),count(address.state) from person inner join address on address.person_id = person.person_id group by city");
+			PreparedStatement stmt=con.prepareStatement(query);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) 
+				System.out.println(rs.getString(1)+" "+
+									rs.getString(2)+" "+
+									rs.getString(3)
+									);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	
+}
 }
