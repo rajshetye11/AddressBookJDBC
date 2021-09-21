@@ -37,4 +37,11 @@ public class AddressBookTest {
 		addbook.getCountofPersonsByCity();
 		dbConnection.close();
 	}
+	
+	@Test
+	public void addNewContact() throws SQLException{
+		Connection jdbccon = new JDBCConn().establishDbConection();
+		addbook.addNewContact(8, "XKNXKX", "jdbaj", "5789", "dxjab@gmail","pune", "maha", "44521", 9);
+		jdbccon.close();
+	}
 }
